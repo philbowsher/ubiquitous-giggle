@@ -3,28 +3,44 @@ title: "phils_cancer_workflow"
 author: "Phil Bowsher"
 format: html
 editor: visual
+params:
+  sex: Female
 ---
 
 ## Packages
 
 ```{r}
-
+library(tidyverse)
+library(plotly)
 ```
 
 ## Import
 
 ```{r}
 
+sample_info <- read_csv("sample_info (2).csv")
+
+sample_info
+
+
 ```
 
 ## Data Wrang
 
 ```{r}
-
+sample_info <- sample_info %>%
+ filter(sex %in% params$sex | is.na(sex))
 ```
 
 ## Data Viz
 
 ```{r}
+p <- ggplot(sample_info) +
+  aes(x = primary_disease, fill = primary_or_metastasis) +
+  geom_bar() +
+  scale_fill_hue(direction = 1) +
+  coord_flip() +
+  theme_minimal()
 
+ggplotly(p)
 ```

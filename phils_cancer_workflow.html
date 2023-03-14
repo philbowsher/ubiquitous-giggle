@@ -21,6 +21,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -34,6 +97,14 @@ ul.task-list li input[type="checkbox"] {
 <script src="phils_cancer_workflow_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="phils_cancer_workflow_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="phils_cancer_workflow_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="phils_cancer_workflow_files/libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="phils_cancer_workflow_files/libs/plotly-binding-4.9.4.1/plotly.js"></script>
+<script src="phils_cancer_workflow_files/libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="phils_cancer_workflow_files/libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="phils_cancer_workflow_files/libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet">
+<script src="phils_cancer_workflow_files/libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="phils_cancer_workflow_files/libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="phils_cancer_workflow_files/libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
 
 
 </head>
@@ -69,25 +140,132 @@ ul.task-list li input[type="checkbox"] {
 <section id="packages" class="level2">
 <h2 class="anchored" data-anchor-id="packages">Packages</h2>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidyverse' was built under R version 4.0.4</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ ggplot2 3.3.5     ✔ purrr   1.0.1
+✔ tibble  3.1.4     ✔ dplyr   1.1.0
+✔ tidyr   1.3.0     ✔ stringr 1.5.0
+✔ readr   2.0.1     ✔ forcats 0.5.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.0.5</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tibble' was built under R version 4.0.5</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidyr' was built under R version 4.0.5</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'readr' was built under R version 4.0.5</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'purrr' was built under R version 4.0.5</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.0.5</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'stringr' was built under R version 4.0.5</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'forcats' was built under R version 4.0.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'plotly' was built under R version 4.0.5</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'plotly'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:ggplot2':
 
+    last_plot</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:stats':
+
+    filter</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:graphics':
+
+    layout</code></pre>
+</div>
 </div>
 </section>
 <section id="import" class="level2">
 <h2 class="anchored" data-anchor-id="import">Import</h2>
 <div class="cell">
-
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>sample_info <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"sample_info (2).csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 1840 Columns: 29── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (27): DepMap_ID, cell_line_name, stripped_cell_line_name, CCLE_Name, ali...
+dbl  (2): COSMICID, WTSI_Master_Cell_ID
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>sample_info</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,840 × 29
+   DepMap_ID  cell_line_name stripped_cell_li… CCLE_Name    alias COSMICID sex  
+   &lt;chr&gt;      &lt;chr&gt;          &lt;chr&gt;             &lt;chr&gt;        &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;
+ 1 ACH-000016 SLR 21         SLR21             SLR21_KIDNEY &lt;NA&gt;        NA &lt;NA&gt; 
+ 2 ACH-000032 MHH-CALL-3     MHHCALL3          MHHCALL3_HA… &lt;NA&gt;        NA Fema…
+ 3 ACH-000033 NCI-H1819      NCIH1819          NCIH1819_LU… &lt;NA&gt;        NA Fema…
+ 4 ACH-000043 Hs 895.T       HS895T            HS895T_FIBR… &lt;NA&gt;        NA Fema…
+ 5 ACH-000049 HEK TE         HEKTE             HEKTE_KIDNEY &lt;NA&gt;        NA &lt;NA&gt; 
+ 6 ACH-000051 TE 617.T       TE617T            TE617T_SOFT… &lt;NA&gt;        NA Fema…
+ 7 ACH-000064 SALE           SALE              SALE_LUNG    &lt;NA&gt;        NA Male 
+ 8 ACH-000068 REC-1          REC1              REC1_HAEMAT… &lt;NA&gt;        NA Male 
+ 9 ACH-000071 &lt;NA&gt;           HS706T            HS706T_BONE  &lt;NA&gt;        NA Fema…
+10 ACH-000076 NCO2           NCO2              NCO2_HAEMAT… &lt;NA&gt;        NA Fema…
+# … with 1,830 more rows, and 22 more variables: source &lt;chr&gt;, RRID &lt;chr&gt;,
+#   WTSI_Master_Cell_ID &lt;dbl&gt;, sample_collection_site &lt;chr&gt;,
+#   primary_or_metastasis &lt;chr&gt;, primary_disease &lt;chr&gt;, Subtype &lt;chr&gt;,
+#   age &lt;chr&gt;, Sanger_Model_ID &lt;chr&gt;, depmap_public_comments &lt;chr&gt;,
+#   lineage &lt;chr&gt;, lineage_subtype &lt;chr&gt;, lineage_sub_subtype &lt;chr&gt;,
+#   lineage_molecular_subtype &lt;chr&gt;, default_growth_pattern &lt;chr&gt;,
+#   model_manipulation &lt;chr&gt;, model_manipulation_details &lt;chr&gt;, …</code></pre>
+</div>
 </div>
 </section>
 <section id="data-wrang" class="level2">
 <h2 class="anchored" data-anchor-id="data-wrang">Data Wrang</h2>
 <div class="cell">
-
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>sample_info <span class="ot">&lt;-</span> sample_info <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">filter</span>(sex <span class="sc">%in%</span> params<span class="sc">$</span>sex <span class="sc">|</span> <span class="fu">is.na</span>(sex))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="data-viz" class="level2">
 <h2 class="anchored" data-anchor-id="data-viz">Data Viz</h2>
 <div class="cell">
-
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(sample_info) <span class="sc">+</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> primary_disease, <span class="at">fill =</span> primary_or_metastasis) <span class="sc">+</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_hue</span>(<span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="htmlwidget-658d9145a2ce814b1078" style="width:100%;height:464px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-658d9145a2ce814b1078">{"x":{"data":[{"orientation":"h","width":[0.9,0.9,0.9,0.9,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999],"base":[16,37,38,16,33,34,9,5,1,6,16,15,51,45,35,17,9,52,37,14,7,21,32,9,5],"x":[1,6,45,8,6,4,1,2,3,13,2,3,1,31,3,1,11,2,36,11,1,4,22,3,2],"y":[3,4,6,7,8,9,10,11,12,13,14,15,16,19,20,21,22,23,24,25,26,27,28,29,30],"text":["count:  1<br />primary_disease: Bladder Cancer<br />primary_or_metastasis: Metastasis","count:  6<br />primary_disease: Bone Cancer<br />primary_or_metastasis: Metastasis","count: 45<br />primary_disease: Breast Cancer<br />primary_or_metastasis: Metastasis","count:  8<br />primary_disease: Cervical Cancer<br />primary_or_metastasis: Metastasis","count:  6<br />primary_disease: Colon/Colorectal Cancer<br />primary_or_metastasis: Metastasis","count:  4<br />primary_disease: Endometrial/Uterine Cancer<br />primary_or_metastasis: Metastasis","count:  1<br />primary_disease: Esophageal Cancer<br />primary_or_metastasis: Metastasis","count:  2<br />primary_disease: Eye Cancer<br />primary_or_metastasis: Metastasis","count:  3<br />primary_disease: Gallbladder Cancer<br />primary_or_metastasis: Metastasis","count: 13<br />primary_disease: Gastric Cancer<br />primary_or_metastasis: Metastasis","count:  2<br />primary_disease: Head and Neck Cancer<br />primary_or_metastasis: Metastasis","count:  3<br />primary_disease: Kidney Cancer<br />primary_or_metastasis: Metastasis","count:  1<br />primary_disease: Leukemia<br />primary_or_metastasis: Metastasis","count: 31<br />primary_disease: Lung Cancer<br />primary_or_metastasis: Metastasis","count:  3<br />primary_disease: Lymphoma<br />primary_or_metastasis: Metastasis","count:  1<br />primary_disease: Myeloma<br />primary_or_metastasis: Metastasis","count: 11<br />primary_disease: Neuroblastoma<br />primary_or_metastasis: Metastasis","count:  2<br />primary_disease: Non-Cancerous<br />primary_or_metastasis: Metastasis","count: 36<br />primary_disease: Ovarian Cancer<br />primary_or_metastasis: Metastasis","count: 11<br />primary_disease: Pancreatic Cancer<br />primary_or_metastasis: Metastasis","count:  1<br />primary_disease: Rhabdoid<br />primary_or_metastasis: Metastasis","count:  4<br />primary_disease: Sarcoma<br />primary_or_metastasis: Metastasis","count: 22<br />primary_disease: Skin Cancer<br />primary_or_metastasis: Metastasis","count:  3<br />primary_disease: Thyroid Cancer<br />primary_or_metastasis: Metastasis","count:  2<br />primary_disease: Unknown<br />primary_or_metastasis: Metastasis"],"type":"bar","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Metastasis","legendgroup":"Metastasis","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"h","width":[0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999],"base":[0,18,2,21,17,8,3,10,2,4,1,2,5,8,34,5,0,11,23,2,6,45,8,3,6,13,15,1,3],"x":[1,2,14,16,19,30,13,23,32,5,4,4,11,7,17,2,3,34,12,15,3,7,29,11,1,8,17,8,2],"y":[1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30],"text":["count:  1<br />primary_disease: Adrenal Cancer<br />primary_or_metastasis: Primary","count:  2<br />primary_disease: Bile Duct Cancer<br />primary_or_metastasis: Primary","count: 14<br />primary_disease: Bladder Cancer<br />primary_or_metastasis: Primary","count: 16<br />primary_disease: Bone Cancer<br />primary_or_metastasis: Primary","count: 19<br />primary_disease: Brain Cancer<br />primary_or_metastasis: Primary","count: 30<br />primary_disease: Breast Cancer<br />primary_or_metastasis: Primary","count: 13<br />primary_disease: Cervical Cancer<br />primary_or_metastasis: Primary","count: 23<br />primary_disease: Colon/Colorectal Cancer<br />primary_or_metastasis: Primary","count: 32<br />primary_disease: Endometrial/Uterine Cancer<br />primary_or_metastasis: Primary","count:  5<br />primary_disease: Esophageal Cancer<br />primary_or_metastasis: Primary","count:  4<br />primary_disease: Eye Cancer<br />primary_or_metastasis: Primary","count:  4<br />primary_disease: Gastric Cancer<br />primary_or_metastasis: Primary","count: 11<br />primary_disease: Head and Neck Cancer<br />primary_or_metastasis: Primary","count:  7<br />primary_disease: Kidney Cancer<br />primary_or_metastasis: Primary","count: 17<br />primary_disease: Leukemia<br />primary_or_metastasis: Primary","count:  2<br />primary_disease: Liposarcoma<br />primary_or_metastasis: Primary","count:  3<br />primary_disease: Liver Cancer<br />primary_or_metastasis: Primary","count: 34<br />primary_disease: Lung Cancer<br />primary_or_metastasis: Primary","count: 12<br />primary_disease: Lymphoma<br />primary_or_metastasis: Primary","count: 15<br />primary_disease: Myeloma<br />primary_or_metastasis: Primary","count:  3<br />primary_disease: Neuroblastoma<br />primary_or_metastasis: Primary","count:  7<br />primary_disease: Non-Cancerous<br />primary_or_metastasis: Primary","count: 29<br />primary_disease: Ovarian Cancer<br />primary_or_metastasis: Primary","count: 11<br />primary_disease: Pancreatic Cancer<br />primary_or_metastasis: Primary","count:  1<br />primary_disease: Rhabdoid<br />primary_or_metastasis: Primary","count:  8<br />primary_disease: Sarcoma<br />primary_or_metastasis: Primary","count: 17<br />primary_disease: Skin Cancer<br />primary_or_metastasis: Primary","count:  8<br />primary_disease: Thyroid Cancer<br />primary_or_metastasis: Primary","count:  2<br />primary_disease: Unknown<br />primary_or_metastasis: Primary"],"type":"bar","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Primary","legendgroup":"Primary","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"h","width":[0.9,0.9,0.9,0.9,0.9,0.9,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999,0.899999999999999],"base":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"x":[18,2,21,17,8,3,10,2,4,1,1,2,5,8,34,5,11,23,2,6,45,8,3,6,13,15,1,3],"y":[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,27,28,29,30],"text":["count: 18<br />primary_disease: Bile Duct Cancer<br />primary_or_metastasis: NA","count:  2<br />primary_disease: Bladder Cancer<br />primary_or_metastasis: NA","count: 21<br />primary_disease: Bone Cancer<br />primary_or_metastasis: NA","count: 17<br />primary_disease: Brain Cancer<br />primary_or_metastasis: NA","count:  8<br />primary_disease: Breast Cancer<br />primary_or_metastasis: NA","count:  3<br />primary_disease: Cervical Cancer<br />primary_or_metastasis: NA","count: 10<br />primary_disease: Colon/Colorectal Cancer<br />primary_or_metastasis: NA","count:  2<br />primary_disease: Endometrial/Uterine Cancer<br />primary_or_metastasis: NA","count:  4<br />primary_disease: Esophageal Cancer<br />primary_or_metastasis: NA","count:  1<br />primary_disease: Eye Cancer<br />primary_or_metastasis: NA","count:  1<br />primary_disease: Gallbladder Cancer<br />primary_or_metastasis: NA","count:  2<br />primary_disease: Gastric Cancer<br />primary_or_metastasis: NA","count:  5<br />primary_disease: Head and Neck Cancer<br />primary_or_metastasis: NA","count:  8<br />primary_disease: Kidney Cancer<br />primary_or_metastasis: NA","count: 34<br />primary_disease: Leukemia<br />primary_or_metastasis: NA","count:  5<br />primary_disease: Liposarcoma<br />primary_or_metastasis: NA","count: 11<br />primary_disease: Lung Cancer<br />primary_or_metastasis: NA","count: 23<br />primary_disease: Lymphoma<br />primary_or_metastasis: NA","count:  2<br />primary_disease: Myeloma<br />primary_or_metastasis: NA","count:  6<br />primary_disease: Neuroblastoma<br />primary_or_metastasis: NA","count: 45<br />primary_disease: Non-Cancerous<br />primary_or_metastasis: NA","count:  8<br />primary_disease: Ovarian Cancer<br />primary_or_metastasis: NA","count:  3<br />primary_disease: Pancreatic Cancer<br />primary_or_metastasis: NA","count:  6<br />primary_disease: Rhabdoid<br />primary_or_metastasis: NA","count: 13<br />primary_disease: Sarcoma<br />primary_or_metastasis: NA","count: 15<br />primary_disease: Skin Cancer<br />primary_or_metastasis: NA","count:  1<br />primary_disease: Thyroid Cancer<br />primary_or_metastasis: NA","count:  3<br />primary_disease: Unknown<br />primary_or_metastasis: NA"],"type":"bar","marker":{"autocolorscale":false,"color":"rgba(127,127,127,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"NA","legendgroup":"NA","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.2283105022831,"r":7.30593607305936,"b":40.1826484018265,"l":177.534246575343},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-4.15,87.15],"tickmode":"array","ticktext":["0","20","40","60","80"],"tickvals":[0,20,40,60,80],"categoryorder":"array","categoryarray":["0","20","40","60","80"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"count","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.4,30.6],"tickmode":"array","ticktext":["Adrenal Cancer","Bile Duct Cancer","Bladder Cancer","Bone Cancer","Brain Cancer","Breast Cancer","Cervical Cancer","Colon/Colorectal Cancer","Endometrial/Uterine Cancer","Esophageal Cancer","Eye Cancer","Gallbladder Cancer","Gastric Cancer","Head and Neck Cancer","Kidney Cancer","Leukemia","Liposarcoma","Liver Cancer","Lung Cancer","Lymphoma","Myeloma","Neuroblastoma","Non-Cancerous","Ovarian Cancer","Pancreatic Cancer","Rhabdoid","Sarcoma","Skin Cancer","Thyroid Cancer","Unknown"],"tickvals":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30],"categoryorder":"array","categoryarray":["Adrenal Cancer","Bile Duct Cancer","Bladder Cancer","Bone Cancer","Brain Cancer","Breast Cancer","Cervical Cancer","Colon/Colorectal Cancer","Endometrial/Uterine Cancer","Esophageal Cancer","Eye Cancer","Gallbladder Cancer","Gastric Cancer","Head and Neck Cancer","Kidney Cancer","Leukemia","Liposarcoma","Liver Cancer","Lung Cancer","Lymphoma","Myeloma","Neuroblastoma","Non-Cancerous","Ovarian Cancer","Pancreatic Cancer","Rhabdoid","Sarcoma","Skin Cancer","Thyroid Cancer","Unknown"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"primary_disease","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"y":0.96751968503937},"annotations":[{"text":"primary_or_metastasis","x":1.02,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"left","yanchor":"bottom","legendTitle":true}],"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"21871dd21c0b":{"x":{},"fill":{},"type":"bar"}},"cur_data":"21871dd21c0b","visdat":{"21871dd21c0b":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
 </div>
 </section>
 
