@@ -1,6 +1,6 @@
 ---
 title: "phils_cancer_workflow"
-author: "Phil Bowsher"
+author: "Phil Bowsher & Cole A"
 format: html
 editor: visual
 params:
